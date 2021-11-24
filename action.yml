@@ -4,10 +4,11 @@ inputs:
     collection:
         description: 'Postman collection'
         required: true
-        default: './tests/pokemon-api-collection.json'
+        default: './tests/postman-collection.json'
     environment:
         description: 'Postman environment variables'
         required: false
+        default: ''
 outputs:
     result:
         description: "Test result"
