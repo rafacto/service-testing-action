@@ -1,0 +1,16 @@
+name: 'Service Test'
+description: Execute Postman collections using Newman
+inputs:
+    collection:
+        description: 'Postman collection'
+        required: true
+        default: './tests/pokemon-api-collection.json'
+    environment:
+        description: 'Postman environment variables'
+        required: false
+outputs:
+    result:
+        description: "Test result"
+runs:
+  using: 'docker'
+  image: 'Dockerfile
