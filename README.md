@@ -14,9 +14,9 @@ Docker Action for running Postman API tests using Newman
 ## Inputs
 * `collection-path`: Required. Path to the Postman collection file in the repository.
 * `environment-path`: Optional. Path to the Postman environment file in the repository.
-* 
+
 ## Workflow Example
-```
+```yaml
 name: Test-Build
 on:
   push:
