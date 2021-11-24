@@ -5,7 +5,7 @@ Docker Action for running Postman API tests using Newman
 ```yaml
   - uses: actions/checkout@master
   - name: Service Test
-    uses: ./.convair-actions/service-test-action
+    uses: rafacto/service-test-action@main
     with:
       collection-path: './testes/postman-collection.json'
       environment-path: './tests/postman-environment.json
