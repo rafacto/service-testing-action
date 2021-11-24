@@ -13,4 +13,4 @@ outputs:
         description: "Test result"
 runs:
   using: 'docker'
-  image: 'Dockerfile
+  image: 'Dockerfile'
