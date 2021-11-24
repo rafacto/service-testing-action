@@ -8,9 +8,11 @@ mkdir -p testResults
 
 # verifica se o environment não foi passado (is empty)
 if [ -z "$INPUT_ENVIRONMENT" ] ; then
+  echo "environment empty"
   newman run $INPUT_COLLECTION_PATH
   newman run $INPUT_COLLECTION_PATH -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html
 else
+  echo "environment filled"
   newman run $INPUT_COLLECTION_PATH -e $INPUT_ENVIRONMENT_PATH 
   newman run $INPUT_COLLECTION_PATH -e $INPUT_ENVIRONMENT_PATH -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html
 fi
