@@ -8,11 +8,11 @@ mkdir -p testResults
 
 # verifica se o environment não foi passado (is empty)
 if [ -z "$INPUT_ENVIRONMENT" ] ; then
-  newman run $INPUT_COLLECTION-PATH 
-  newman run $INPUT_COLLECTION-PATH -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html
+  newman run $INPUT_COLLECTION_PATH
+  newman run $INPUT_COLLECTION_PATH -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html
 else
-  newman run $INPUT_COLLECTION-PATH -e $INPUT_ENVIRONMENT-PATH 
-  newman run $INPUT_COLLECTION-PATH -e $INPUT_ENVIRONMENT-PATH -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html
+  newman run $INPUT_COLLECTION_PATH -e $INPUT_ENVIRONMENT_PATH 
+  newman run $INPUT_COLLECTION_PATH -e $INPUT_ENVIRONMENT_PATH -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html
 fi
 
 # verifica se a saída do último processo executado (o newman) foi mal sucedida (= 1)
