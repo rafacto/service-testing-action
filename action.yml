@@ -1,11 +1,11 @@
 name: 'Service Test'
 description: Execute Postman collections using Newman
 inputs:
-    collection_path:
+    collectionPath:
         description: 'Postman collection'
         required: true
         default: './tests/postman-collection.json'
-    environment_path:
+    environmentPath:
         description: 'Postman environment variables'
         required: false
         default: ''
