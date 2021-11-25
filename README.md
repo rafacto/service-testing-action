@@ -36,8 +36,8 @@ jobs:
       id: servicetest
       uses: rafacto/service-testing-action@main
       with:
-        collection: './tests/pokemon-api-collection.json'
-        environment: './tests/pokemonapi-env.json'
+        collectionPath: './tests/pokemon-api-collection.json'
+        environmentPath: './tests/pokemonapi-env.json'
         
     - name: Upload as Artifact the test html report
       uses: actions/upload-artifact@v2
