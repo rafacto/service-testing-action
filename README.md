@@ -7,13 +7,13 @@ Docker Action for running Postman API tests using Newman
   - name: Service Test
     uses: rafacto/service-testing-action@main
     with:
-      collection-path: './testes/postman-collection.json'
-      environment-path: './tests/postman-environment.json
+      collectionPath: './tests/postman-collection.json'
+      environmentPath: './tests/postman-environment.json
 ```
 
 ## Inputs
-* `collection-path`: Required. Path to the Postman collection file in the repository.
-* `environment-path`: Optional. Path to the Postman environment file in the repository.
+* `collectionPath`: Required. Path to the Postman collection file in the repository.
+* `environmentPath`: Optional. Path to the Postman environment file in the repository.
 
 ## Workflow Example
 ```yaml
@@ -30,7 +30,7 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: Service Test
-      uses: ./.github/actions/service-test
+      uses: rafacto/service-testing-action@main
       with:
         collection: './tests/pokemon-api-collection.json'
         environment: './tests/pokemonapi-env.json'
