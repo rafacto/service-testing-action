@@ -15,6 +15,9 @@ else
   newman run $INPUT_COLLECTIONPATH -e $INPUT_ENVIRONMENTPATH -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html
 fi
 
+testReportPath="testResults/htmlreport.html"
+echo "::set-output name=testReportPath::$testReportPath"
+
 # verifica se a saída do último processo executado (o newman) foi mal sucedida (= 1)
 if [ $? -eq 1 ] ; then
   echo "Game over!"

@@ -10,8 +10,8 @@ inputs:
         required: false
         default: ''
 outputs:
-    result:
-        description: "Test result"
+    testReportPath:
+        description: "Path to the generated HTML Test Resport"
 runs:
   using: 'docker'
   image: 'Dockerfile'
