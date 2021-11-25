@@ -15,6 +15,9 @@ Docker Action for running Postman API tests using Newman
 * `collectionPath`: Required. Path to the Postman collection file in the repository.
 * `environmentPath`: Optional. Path to the Postman environment file in the repository.
 
+## Outputs
+* `testReportPath`: Path to the html test report.
+ 
 ## Workflow Example
 ```yaml
 name: Test-Build
@@ -30,8 +33,16 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: Service Test
+      id: servicetest
       uses: rafacto/service-testing-action@main
       with:
         collection: './tests/pokemon-api-collection.json'
         environment: './tests/pokemonapi-env.json'
+        
+    - name: Upload as Artifact the test html report
+      uses: actions/upload-artifact@v2
+      if: always()
+      with:
+        name: test-report
+        path: ${{ steps.servicetest.outputs.testReportPath }}
 ```        
