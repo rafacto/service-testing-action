@@ -22,10 +22,10 @@ testReportPath="testResults/htmlreport.html"
 echo "::set-output name=testReportPath::$testReportPath"
 
 # se os testes falharam, sai com código 1, o que vai parar a esteira
-if [ $testFailed -eq 1 ] ; then
-  echo "Game over!"
-  exit 1
-fi
+#if [ $testFailed -eq 1 ] ; then
+#  echo "Game over!"
+#  exit 1
+#fi
 
 cd testResults
 for entry in "$PWD"/*
