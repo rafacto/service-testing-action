@@ -37,7 +37,7 @@ if [ $GITHUB_BASE_REF = "release/*" ] ; then
   
 else
   echo "Service tests were not performed. They are executed only for pull requests to release branches."
-  testReportPath=""
+  testReportPath="no"
 fi
 
 echo "::set-output name=testReportPath::$testReportPath"
