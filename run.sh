@@ -6,6 +6,11 @@ npm install -g newman-reporter-htmlextra
 
 mkdir -p testResults
 
+echo "GITHUB_EVENT_NAME: $GITHUB_EVENT_NAME"
+echo "GITHUB_REF: $GITHUB_REF"
+echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
+echo "GITHUB_HEAD_REF: $GITHUB_HEAD_REF"
+
 # verifica se o environment não foi passado (is empty)
 if [ -z "$INPUT_ENVIRONMENTPATH" ] ; then
   newman run $INPUT_COLLECTIONPATH
