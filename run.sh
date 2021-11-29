@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "GITHUB_BASE_REF: $GITHUB_BASE_REF
+echo "GITHUB_BASE_REF: $GITHUB_BASE_REF"
 
 if [[ $GITHUB_BASE_REF =~ release/* ]] ; then
   echo "entrou"
