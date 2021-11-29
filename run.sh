@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # verifica se o evento que disparou a branch é um pull_request para alguma branch de release
-if [[ $GITHUB_BASE_REF = [release/*] ]] ; then 
+if [[ $GITHUB_BASE_REF =~ release/* ]] ; then
   npm install -g newman
 
   npm install -g newman-reporter-htmlextra
