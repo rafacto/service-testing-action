@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # verifica se o evento que disparou a branch é um pull_request para alguma branch de release
 if [[ $GITHUB_BASE_REF =~ release/* ]] ; then
