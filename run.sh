@@ -1,13 +1,5 @@
 #!/bin/bash
 
-echo "GITHUB_BASE_REF: $GITHUB_BASE_REF"
-
-if [[ $GITHUB_BASE_REF =~ release/* ]] ; then
-  echo "entrou"
-else
-  echo "não entrou"
-fi
- 
 # verifica se o evento que disparou a branch é um pull_request para alguma branch de release
 if [[ $GITHUB_BASE_REF =~ release/* ]] ; then
   npm install -g newman
