@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # verifica se o evento que disparou a branch é um pull_request para alguma branch de release
-if [ $GITHUB_BASE_REF = "release/*" ] ; then
+#if [ $GITHUB_BASE_REF = "release/*" ] ; then
   npm install -g newman
 
   npm install -g newman-reporter-htmlextra
@@ -35,8 +35,8 @@ if [ $GITHUB_BASE_REF = "release/*" ] ; then
     echo "$entry"
   done
   
-else
-  echo "Service tests were not performed. They are executed only for pull requests to release branches."
-fi
+#else
+#  echo "Service tests were not performed. They are executed only for pull requests to release branches."
+#fi
 
 
