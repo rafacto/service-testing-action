@@ -1,5 +1,5 @@
 # Action for Service Testing
-Docker Action for running Postman API tests using Newman
+Docker Action for running Postman API tests using Newman. The action executes the tests only for pull requests to release branches (branches that start with "release/")
 
 ## Usage
 ```yaml
@@ -20,11 +20,11 @@ Docker Action for running Postman API tests using Newman
  
 ## Workflow Example
 ```yaml
-name: Test-Build
+name: Service Testing
 on:
   push:
-    branches:
-      - master
+  pull_request:
+  
 jobs:
   test-api:
     runs-on: ubuntu-latest
@@ -32,7 +32,7 @@ jobs:
 
     - uses: actions/checkout@v2
     
-    - name: Service Test
+    - name: Service Tests
       id: servicetest
       uses: rafacto/service-testing-action@main
       with:
@@ -45,4 +45,6 @@ jobs:
       with:
         name: test-report
         path: ${{ steps.servicetest.outputs.testReportPath }}
+        if-no-files-found: ignore
+        retention-days: 30
 ```        
