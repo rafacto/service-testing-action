@@ -1,6 +1,9 @@
 #!/bin/bash
 
-# verifica se o evento que disparou a branch é um pull_request para alguma branch de release
+echo "Esperando aplicação subir para Sit. Isso leva alguns minutos."
+sleep 5m
+
+# verifica se o evento que disparou a pipeline é um pull_request para alguma branch de release
 if [[ $GITHUB_BASE_REF =~ release/* ]] ; then
   npm install -g newman
 
