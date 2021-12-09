@@ -3,6 +3,7 @@
 # verifica se o evento que disparou a pipeline é um pull_request para alguma branch de release
 # if [[ $GITHUB_BASE_REF =~ release/* ]] ; then
 
+echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
 # verifica se a branch que disparou o workflow é de release
 if [[ $GITHUB_REF_NAME =~ release/* ]] ; then
   echo "Esperando aplicação subir para Sit. Isso leva alguns minutos."
