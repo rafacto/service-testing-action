@@ -6,7 +6,11 @@
 
 # verifica se a branch que disparou o workflow é de release
 if [[ $GITHUB_BASE_REF =~ release/* ]] ; then
-  echo "Esperando aplicação subir para Sit. Isso leva $INPUT_WAITINGTIME minutos."
+
+  echo -e "\n#############################################"
+  echo "Waiting for application to be deployed in Sit. This takes $INPUT_WAITINGTIME (minutes)."
+  echo -e "#############################################\n"
+
   sleep $INPUT_WAITINGTIME
   
   npm install -g newman
@@ -30,11 +34,13 @@ if [[ $GITHUB_BASE_REF =~ release/* ]] ; then
   testReportPath="testResults/htmlreport.html"
   echo "::set-output name=testReportPath::$testReportPath"
 
-  echo "INPUT_STOPPIPELINE: $INPUT_STOPPIPELINE"
-  if [ $testFailed -eq 1 ] && [ "$INPUT_STOPPIPELINE" = "YES" ] ; then
-    echo "Some test scenarios have failed. Check generated report for more information."
-    exit 1
-  fi
+  #if [ $testFailed -eq 1 ] && [ "$INPUT_STOPPIPELINE" = "YES" ] ; then
+  #  echo -e "\n#############################################"
+  #  echo "Some test scenarios have failed. Check generated report for more information."
+  #  echo -e "#############################################\n"
+ 
+  #  exit 1
+  #fi
 
   cd testResults
   for entry in "$PWD"/*
