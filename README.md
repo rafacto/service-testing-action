@@ -37,7 +37,7 @@ jobs:
     steps:
 
     - uses: actions/checkout@v2
-	
+    
     - name: Checkout Convair Actions
       uses: actions/checkout@v2
       with:
@@ -45,7 +45,7 @@ jobs:
         token: ${{ secrets.ACTIONS_TOKEN }}
         path: ./.convair-actions
         ref: main
-	
+    
     - name: AKS Sandbox Deploy
       uses: ./.convair-actions/aks-sandbox-deploy
       env:
@@ -59,14 +59,14 @@ jobs:
         namespaceSuffix: "-sit"
         sandboxPath: kustomize/base
         restrictedBranches: "${{ env.SANDBOX_BRANCH }}"
-	
+    
     - name: Service Tests
       id: servicetest
       uses: rafacto/service-testing-action@main
       with:
         collectionPath: './tests/pokemon-api-collection.json'
         environmentPath: './tests/pokemonapi-env.json'
-	
+    
     - name: Upload as Artifact the test html report
       uses: actions/upload-artifact@v2
       if: always()
