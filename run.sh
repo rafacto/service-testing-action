@@ -2,9 +2,10 @@
 
 # verifica se o evento que disparou a pipeline é um pull_request para alguma branch de release
 # if [[ $GITHUB_BASE_REF =~ release/* ]] ; then
+# [ "$BRANCH_PREFIX" = "release" ]
 
 # verifica se a branch que disparou o workflow é de release
-if [ "$BRANCH_PREFIX" = "release" ] ; then
+if [ "$GITHUB_BASE_REF" = release/* ] ; then
   echo "Esperando aplicação subir para Sit. Isso leva $INPUT_WAITINGTIME minutos."
   sleep $INPUT_WAITINGTIME
   
