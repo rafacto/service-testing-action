@@ -5,7 +5,7 @@
 # [ "$BRANCH_PREFIX" = "release" ]
 
 # verifica se a branch que disparou o workflow é de release
-if [[ $GITHUB_BASE_REF =~ release/* ]] ; then
+if [ "$BRANCH_PREFIX" = "release" ] ; then
 
   echo -e "\n#############################################"
   echo "Waiting for application to be deployed in Sit. This takes $INPUT_WAITINGTIME (minutes)."
@@ -51,8 +51,7 @@ if [[ $GITHUB_BASE_REF =~ release/* ]] ; then
 else
   echo "Service tests were not performed. They are executed only for pull requests to release branches."
   testReportPath="tests were not executed"
+  echo "::set-output name=testReportPath::$testReportPath"
 fi
-
-echo "::set-output name=testReportPath::$testReportPath"
 
 
