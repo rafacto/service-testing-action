@@ -38,7 +38,6 @@ jobs:
 
     - uses: actions/checkout@v2
 	
-    #Obtém as actions de Convair Actions
     - name: Checkout Convair Actions
       uses: actions/checkout@v2
       with:
@@ -47,7 +46,6 @@ jobs:
         path: ./.convair-actions
         ref: main
 	
-    #Sobe aplicação para sit para que os testes de serviço sejam exacutados nesse ambiente
     - name: AKS Sandbox Deploy
       uses: ./.convair-actions/aks-sandbox-deploy
       env:
@@ -62,7 +60,6 @@ jobs:
         sandboxPath: kustomize/base
         restrictedBranches: "${{ env.SANDBOX_BRANCH }}"
 	
-    #Executa os testes de serviço
     - name: Service Tests
       id: servicetest
       uses: rafacto/service-testing-action@main
@@ -70,7 +67,6 @@ jobs:
         collectionPath: './tests/pokemon-api-collection.json'
         environmentPath: './tests/pokemonapi-env.json'
 	
-    #Salva o relatório dos testes como artefato
     - name: Upload as Artifact the test html report
       uses: actions/upload-artifact@v2
       if: always()
