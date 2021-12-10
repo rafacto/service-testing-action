@@ -49,7 +49,7 @@ if [ "$BRANCH_PREFIX" = "release" ] ; then
   done
   
 else
-  echo "Service tests were not performed. They are executed only for pull requests to release branches."
+  echo "Service tests were not performed. They are executed only for release branches."
   testReportPath="tests were not executed"
   echo "::set-output name=testReportPath::$testReportPath"
 fi
