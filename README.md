@@ -1,5 +1,5 @@
 # Action for Service Testing
-Docker Action for running Postman API tests using Newman. The action executes the tests only for pull requests to release branches (branches that start with "release/")
+Docker Action que executa testes de API do Postman utilizando o Newman. A action só executa os testes para branches de release.
 
 ## Usage
 ```yaml
@@ -12,33 +12,65 @@ Docker Action for running Postman API tests using Newman. The action executes th
 ```
 
 ## Inputs
-* `collectionPath`: Required. Path to the Postman collection file in the repository.
-* `environmentPath`: Optional. Path to the Postman environment file in the repository.
+* `collectionPath`: Obrigatório. Caminho até o arquivo da Postman Collection no repositório.
+* `environmentPath`: Opcional. Caminho até o arquivo do Postman Environment no repositório.
+* `stopPipeline`: Opcional. Valor default: YES. Se testes falharem, retorna saída 1, o que parará a esteira de ci/cd.
+* `waitingTime`: Opcional. Valor default: 3m. Tempo de espera (em minutos) antes de começar a executar os testes. Pode ser útil quando necessário esperar pela subida da aplicação no host onde os testes foram programados para serem executados.
 
 ## Outputs
-* `testReportPath`: Path to the html test report.
+* `testReportPath`: Caminho do relatório html dos testes.
  
 ## Workflow Example
 ```yaml
 name: Service Testing
 on:
   push:
-  pull_request:
+  workflow_dispatch:
+
+env:
+  SANDBOX_NAMESPACE: cargas
+  SANDBOX_BRANCH: release/*
   
 jobs:
   test-api:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
 
     - uses: actions/checkout@v2
+	
+	#Obtém as actions de Convair Actions
+    - name: Checkout Convair Actions
+      uses: actions/checkout@v2
+      with:
+        repository: viavarejo-internal/convair-actions
+        token: ${{ secrets.ACTIONS_TOKEN }}
+        path: ./.convair-actions
+        ref: main
+	
+	#Sobe aplicação para sit para que os testes de serviço sejam exacutados nesse ambiente
+    - name: AKS Sandbox Deploy
+      uses: ./.convair-actions/aks-sandbox-deploy
+      env:
+        SHOULD_DEPLOY_SANDBOX: "YES"
+      with:
+        tool: kustomize
+        projectNames: "${{ env.PROJECT_NAME }}"
+        azureClientId: ${{ secrets.AZURE_CLIENT_ID }}
+        azureClientSecret: ${{ secrets.AZURE_CLIENT_SECRET }}
+        azureTenantId: ${{ secrets.AZURE_TENANT_ID }}
+        namespaceSuffix: "-sit"
+        sandboxPath: kustomize/base
+        restrictedBranches: "${{ env.SANDBOX_BRANCH }}"
     
+	#Executa os testes de serviço
     - name: Service Tests
       id: servicetest
       uses: rafacto/service-testing-action@main
       with:
         collectionPath: './tests/pokemon-api-collection.json'
         environmentPath: './tests/pokemonapi-env.json'
-        
+    
+	#Salva o relatório dos testes como artefato
     - name: Upload as Artifact the test html report
       uses: actions/upload-artifact@v2
       if: always()

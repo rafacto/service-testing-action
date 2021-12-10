@@ -3,11 +3,10 @@
 # verifica se o evento que disparou a pipeline é um pull_request para alguma branch de release
 # if [[ $GITHUB_BASE_REF =~ release/* ]] ; then
 
-echo "BRANCH_PREFIX: $BRANCH_PREFIX"
 # verifica se a branch que disparou o workflow é de release
 if [ "$BRANCH_PREFIX" = "release" ] ; then
-  echo "Esperando aplicação subir para Sit. Isso leva alguns minutos."
-  sleep 5m
+  echo "Esperando aplicação subir para Sit. Isso leva $INPUT_WAITINGTIME minutos."
+  sleep $INPUT_WAITINGTIME
   
   npm install -g newman
 
@@ -30,11 +29,11 @@ if [ "$BRANCH_PREFIX" = "release" ] ; then
   testReportPath="testResults/htmlreport.html"
   echo "::set-output name=testReportPath::$testReportPath"
 
-  # se os testes falharam, sai com código 1 para parar a esteira
-  #if [ $testFailed -eq 1 ] ; then
-  #  echo "Game over!"
-  #  exit 1
-  #fi
+  echo "INPUT_STOPPIPELINE: $INPUT_STOPPIPELINE"
+  if [ $testFailed -eq 1 ] && [ "$INPUT_STOPPIPELINE" = "YES" ] ; then
+    echo "Some test scenarios have failed. Check generated report for more information."
+    exit 1
+  fi
 
   cd testResults
   for entry in "$PWD"/*

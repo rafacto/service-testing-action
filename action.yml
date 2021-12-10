@@ -4,11 +4,19 @@ inputs:
     collectionPath:
         description: 'Postman collection'
         required: true
-        default: './tests/postman-collection.json'
+        default: ''
     environmentPath:
         description: 'Postman environment variables'
         required: false
         default: ''
+    stopPipeline:
+        description: 'Stop pipeline if tests fail'
+        required: false
+        default: 'YES'
+    waitingTime:
+        description: 'Waiting time before tests execution'
+        required: false
+        default: '3m'
 outputs:
     testReportPath:
         description: "Path to the generated HTML Test Resport"
