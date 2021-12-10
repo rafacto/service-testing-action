@@ -5,7 +5,7 @@
 # [ "$BRANCH_PREFIX" = "release" ]
 
 # verifica se a branch que disparou o workflow é de release
-if [ "$GITHUB_BASE_REF" = release/* ] ; then
+if [[ $GITHUB_BASE_REF =~ release/* ]] ; then
   echo "Esperando aplicação subir para Sit. Isso leva $INPUT_WAITINGTIME minutos."
   sleep $INPUT_WAITINGTIME
   
