@@ -5,7 +5,7 @@
 # [ "$BRANCH_PREFIX" = "release" ]
 
 # verifica se a branch que disparou o workflow é de release
-if [ "$BRANCH_PREFIX" = "release" ] ; then
+if [ "$BRANCH_PREFIX" = "feature" ] ; then
 
   echo -e "\n#############################################"
   echo "Waiting for application to be deployed in Sit. This takes $INPUT_WAITINGTIME (minutes)."
